@@ -11,7 +11,7 @@ import subprocess
 
 def do_correctness(operation):
     gems_repo = subprocess.check_output(
-        ["find", "/", "-type", "d", "-name", "FlagGems"], text=True).strip()
+        ["find", "/workspace", "-type", "d", "-iname", "FlagGems"], text=True).strip()
 
     test_pyfile_str = subprocess.check_output(
         f"cd {os.path.join(gems_repo, 'tests')} && grep -rn '_{operation}(' .",
