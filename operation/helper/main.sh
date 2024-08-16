@@ -1,17 +1,14 @@
 #!/bin/bash
 
 # ==========================修改点1: START==========================
-VENDOR="nvidia"
-ACCE_CONTAINER_OPT=" --gpus all"
-ACCE_VISIBLE_DEVICE_ENV_NAME="CUDA_VISIBLE_DEVICES"
+VENDOR="cambricon"
+ACCE_CONTAINER_OPT=" --device=/dev/cambricon_dev0:/dev/cambricon_dev0 --device=/dev/cambricon_dev1:/dev/cambricon_dev1 --device=/dev/cambricon_dev2:/dev/cambricon_dev2 --device=/dev/cambricon_dev3:/dev/cambricon_dev3  --device=/dev/cambricon_dev4:/dev/cambricon_dev4  --device=/dev/cambricon_dev5:/dev/cambricon_dev5  --device=/dev/cambricon_dev6:/dev/cambricon_dev6   --device=/dev/cambricon_dev7:/dev/cambricon_dev7  --device=/dev/cambricon_ctl "
+ACCE_VISIBLE_DEVICE_ENV_NAME="MLU_VISIBLE_DEVICES"
 SSH_PORT="22"
 HOSTS_PORTS="[\"2222\"]"
 MASTER_PORT="29501"
 TDP="400W"
 
-ip_address="10.1.2.155"
-chip_name="A100_40_SXM"
-env_name="ngctorch2403"
 
 declare -A spec_tflops_dict
 spec_tflops_dict["BF16"]=312
@@ -19,6 +16,11 @@ spec_tflops_dict["FP16"]=312
 spec_tflops_dict["FP32"]=19.5
 spec_tflops_dict["INT32"]=19.5
 spec_tflops_dict["INT16"]=-1
+
+ip_address="127.0.0.1"
+chip_name="MLU"
+env_name="camtorch0830"
+
 #=============================STOP==========================
 
 declare -A op_dict
@@ -74,6 +76,7 @@ op_dict["sub"]="FP32 FP16 BF16"
 op_dict["sum"]="FP32 FP16 BF16"
 op_dict["tanh"]="FP32 FP16 BF16"
 op_dict["triu"]="FP32 FP16 BF16"
+op_dict["rsub"]="FP32 FP16 BF16"
 #=============================STOP==========================
 
 
